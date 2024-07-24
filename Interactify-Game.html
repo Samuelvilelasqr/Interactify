@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactify-Game</title>
+    <script>
+        function changePlaceholder() {
+            var nameInput = document.getElementById("nameInput");
+            var userName = nameInput.value;
+            if (userName) {
+                if (userName.toLowerCase() === "interactify") {
+                    document.getElementById("dialogue").innerText = "VOCÊ ACHA QUE EU ESTOU BRINCANDO?!";
+                    setTimeout(function() {
+                        document.getElementById("dialogue").innerText = "Bem, eu não sei se deveria contar isso para você... Mas quando eu era humano, meu irmão adorava fazer experimentos científicos, etc... Ele me odiava e por isso me transformou numa máquina, então, por gentileza, você poderia me salvar?";
+                        document.getElementById("options").innerHTML = '<button onclick="endGame(\'finalVerdadeiro\')">Claro!</button><button onclick="endGame(\'finalFalso\')">Morra...</button>';
+                    }, 5000);
+                } else {
+                    nameInput.placeholder = "Uau! Que belo nome, " + userName + "!";
+                    nameInput.value = ""; // Limpa o campo de entrada
+                    document.getElementById("dialogue").innerText = "Você quer brincar?";
+                    document.getElementById("options").innerHTML = '<button onclick="play()">Sim</button><button onclick="beSad()">Não</button>';
+                }
+            }
+            return false; // Previne o envio do formulário
+        }
+
+        function play() {
+            document.getElementById("dialogue").innerText = "*Você brincou*";
+            document.getElementById("options").innerHTML = '';
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Você quer ler livros também?";
+                document.getElementById("options").innerHTML = '<button onclick="readBooks()">Sim</button><button onclick="beSadAndEnd()">Não</button>';
+            }, 2000);
+        }
+
+        function beSad() {
+            document.getElementById("dialogue").innerText = "Interactify fica triste";
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Pelo menos você quer conversar?";
+                document.getElementById("options").innerHTML = '<button onclick="talk()">Sim</button><button onclick="genocide()">Não!</button>';
+            }, 3000);
+        }
+
+        function readBooks() {
+            document.getElementById("dialogue").innerText = "Ótimo! aceita um pouco de chá?";
+            document.getElementById("options").innerHTML = '<button onclick="acceptTea()">Sim</button><button onclick="drown()">Não</button>';
+        }
+
+        function beSadAndEnd() {
+            document.getElementById("dialogue").innerText = "Ok...";
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Interactify te afogou com o chá";
+                document.getElementById("options").innerHTML = '*Final ruim desbloqueado*';
+            }, 2000);
+        }
+
+        function acceptTea() {
+            document.getElementById("dialogue").innerText = "Que bom que aceitou";
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Eu sou um humano preso em uma máquina, me ajude!";
+                document.getElementById("options").innerHTML = '<button onclick="goodEnding()">Ajudar</button><button onclick="badEnding()">Não ajudar</button>';
+            }, 5000);
+        }
+
+        function drown() {
+            document.getElementById("dialogue").innerText = "Interactify te afogou com o chá";
+            document.getElementById("options").innerHTML = '*Final ruim desbloqueado*';
+        }
+
+        function genocide() {
+            document.getElementById("dialogue").innerText = "Interactify te dá um soco";
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Espero que aprenda...";
+                document.getElementById("options").innerHTML = '<button onclick="reset()">Pedir desculpa</button><button onclick="explosion()">Dar um soco de volta</button>';
+            }, 3000);
+        }
+
+        function talk() {
+            document.getElementById("dialogue").innerText = "Conversa sobre o que?";
+            document.getElementById("options").innerHTML = '<button onclick="talkGames()">Conversar sobre jogos</button><button onclick="talkBooks()">Conversar sobre livros</button>';
+        }
+
+        function talkGames() {
+            document.getElementById("dialogue").innerText = "*Você conversou sobre jogos.*";
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Você quer um pouco de chá?";
+                document.getElementById("options").innerHTML = '<button onclick="acceptTea()">Sim</button>';
+            }, 3000);
+        }
+
+        function talkBooks() {
+            document.getElementById("dialogue").innerText = "*Você conversa sobre livros com Interactify.*";
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Você quer um pouco de chá?";
+                document.getElementById("options").innerHTML = '<button onclick="acceptTea()">Sim</button>';
+            }, 3000);
+        }
+
+        function explosion() {
+            document.getElementById("dialogue").innerText = "Interactify se pergunta por que você está sendo mal-educado e então te explode";
+            document.getElementById("options").innerHTML = '*Final Genocídio desbloqueado*';
+        }
+
+        function reset() {
+            location.reload();
+        }
+
+        function goodEnding() {
+            document.getElementById("dialogue").innerText = "Obrigado! sou muito grato por você, agora estou livre e não tenho com o que se preocupar.";
+            document.getElementById("options").innerHTML = '(F5 para voltar do zero) *Final bom desbloqueado*';
+        }
+
+        function badEnding() {
+            document.getElementById("dialogue").innerText = "Interactify te transforma em uma máquina também para não ficar solitário.";
+            document.getElementById("options").innerHTML = '*Final solitário desbloqueado*';
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Você se sente melhor assim?";
+                document.getElementById("options").innerHTML = '<button onclick="comparse()">Sim</button><button onclick="comparse()">Sim</button>';
+            }, 30000);
+        }
+
+        function comparse() {
+            document.getElementById("dialogue").innerText = "Ótimo...";
+            setTimeout(function() {
+                document.getElementById("dialogue").innerText = "Vamos destruir e dominar esse mundo inútil";
+                document.getElementById("options").innerHTML = '<button onclick="finalComparsa()">Sim</button><button onclick="reset()">Não</button>';
+            }, 5000);
+        }
+
+        function finalComparsa() {
+            document.getElementById("dialogue").innerText = "*Final comparsa desbloqueado*";
+            document.getElementById("options").innerHTML = '';
+        }
+
+        function endGame(final) {
+            if (final === 'finalVerdadeiro') {
+                document.getElementById("dialogue").innerText = "Muito obrigado! Eu te devo muito e te perdôo por tudo! (Final verdadeiro desbloqueado)";
+            } else if (final === 'finalFalso') {
+                document.getElementById("dialogue").innerText = "*Interactify explode em pedaços em quanto você ri...*(Final falso desbloqueado)";
+            }
+            document.getElementById("options").innerHTML = '';
+        }
+    </script>
+</head>
+<body>
+    <h1>Interactify-Game</h1>
+    <hr>
+    <form onsubmit="return changePlaceholder()">
+        <label>Interactify:</label>
+        <input type="text" id="nameInput" placeholder="Olá! Qual o seu nome?">
+        <button type="submit">Enviar</button>
+    </form>
+    <div id="dialogue"></div>
+    <div id="options"></div>
+</body>
+</html>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<Small>qualquer bug, reporte-o mandando mensagem pelo meu email.</Small>
